@@ -5,7 +5,7 @@
 #+   - ENPKG
 #+   - Templated
 #+ enumerate:
-#+   - ionisation_mode:
+#+   - type:
 #+     - https://enpkg.commons-lab.org/kg/LCMSAnalysisPos
 #+     - https://enpkg.commons-lab.org/kg/LCMSAnalysisNeg
 
@@ -18,5 +18,5 @@ WHERE
     ?feature rdf:type enpkg:LCMSFeature .
         ?featurelist enpkg:has_lcms_feature ?feature .
             ?lcms enpkg:has_lcms_feature_list ?featurelist .
-                ?lcms rdf:type ?_ionisation_mode_iri .
+                ?lcms rdf:type ?_type_iri .
     }

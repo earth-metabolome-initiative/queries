@@ -112,7 +112,6 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
             
 SELECT DISTINCT ?feature ?feature_opp ?ik2d ?rt ?rt_opp
 WHERE
-{    
     {
     ?sample rdf:type enpkg:LabExtract
     FILTER(regex(str(?sample), ?_SampleCode))
@@ -136,4 +135,3 @@ WHERE
 
     FILTER(((?rt - ?_RTTolerance_integer) < ?rt_opp) && ((?rt + ?_RTTolerance_integer) > ?rt_opp))
     }
-}

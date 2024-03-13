@@ -120,12 +120,11 @@ WHERE
     ?sample enpkg:has_LCMS ?lcms .
         ?lcms rdf:type enpkg:LCMSAnalysisPos .
         ?lcms enpkg:has_lcms_feature_list ?feature_list .
-            ?feature_list enpkg:has_lcms_feature ?feature .                    
+            ?feature_list enpkg:has_lcms_feature ?feature .
                 ?feature enpkg:has_retention_time ?rt .
                 ?feature enpkg:has_sirius_annotation ?sirius .
                     ?sirius enpkg:has_InChIkey2D ?ik2d .
-                    
-        
+                
     ?sample enpkg:has_LCMS ?lcms_opp .
     ?lcms_opp rdf:type enpkg:LCMSAnalysisNeg .
     ?lcms_opp enpkg:has_lcms_feature_list ?feature_list_opp .

@@ -1,4 +1,9 @@
-# Count the number of distinct IK2D among structural annotations
+#+ summary: Distinct IK2D among structural annotations
+#+ description: Count the number of distinct IK2D among structural annotations
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/sparql
+#+ tags:
+#+   - ENPKG
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

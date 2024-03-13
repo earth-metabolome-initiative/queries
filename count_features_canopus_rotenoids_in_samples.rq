@@ -1,6 +1,8 @@
-# Count the number of LCMS features annotated as rotenoids
-# in the different samples, and retrieve the activity of these
-# samples against T. cruzi.
+#+ summary: Count the number of LCMS features annotated as rotenoids in the different samples, and retrieve the activity of these samples against T. cruzi.
+#+ description: Count the number of LCMS features annotated as rotenoids in the different samples, and retrieve the activity of these samples against T. cruzi.
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

@@ -1,5 +1,8 @@
-# Count for a given LCMS feature of the dataset the number of peak/loss
-# in common with a given feature
+#+ summary: Count for a given LCMS feature of the dataset the number of peak/loss in common with a given feature
+#+ description: Count for a given LCMS feature of the dataset the number of peak/loss in common with a given feature
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

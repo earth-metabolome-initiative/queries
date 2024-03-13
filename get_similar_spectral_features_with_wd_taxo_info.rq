@@ -1,9 +1,8 @@
 #+ summary: Spectral search peak-loss
 #+ description: Search, through counts of common peaks and loss, spectrally related features within or across datasets. Return their species and upper taxonomy through a federated Wikidata search
-#+ endpoint: https://enpkg.commons-lab.org/graphdb/sparql
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
 #+ tags:
 #+   - ENPKG
-#+   - Natural products
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

@@ -1,5 +1,10 @@
-# Count the occurence of structural annotations (SIRIUS with cut-off score)
-# in a selection of samples and in the complete dataset.
+#+ summary: Count the occurence of structural annotations (SIRIUS with cut-off score) in a selection of samples and in the complete dataset.
+#+ description: Count the occurence of structural annotations (SIRIUS with cut-off score) in a selection of samples and in the complete dataset.
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

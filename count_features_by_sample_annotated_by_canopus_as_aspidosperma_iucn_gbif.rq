@@ -1,6 +1,9 @@
-# Count the number of features annotated as aspidosperma type alkaloids 
-# by CANOPUS (p>0.5) and RT filter in the different samples
-# Return the WD QID of the source, its IUCN status and the GBIF id
+#+ summary: Count the number of features annotated as aspidosperma type alkaloids by CANOPUS (p>0.5) and RT filter in the different samples. Return the WD QID of the source, its IUCN status and the GBIF id
+#+ description: Count the number of features annotated as aspidosperma type alkaloids by CANOPUS (p>0.5) and RT filter in the different samples. Return the WD QID of the source, its IUCN status and the GBIF id
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

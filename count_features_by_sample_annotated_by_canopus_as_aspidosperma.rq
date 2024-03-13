@@ -1,5 +1,9 @@
-# Count the number of features annotated as aspidosperma type alkaloids 
-# by CANOPUS (p>0.5) in the different samples
+#+ summary: Count the number of features annotated as aspidosperma type alkaloids by CANOPUS (p>0.5) in the different samples
+#+ description: Count the number of features annotated as aspidosperma type alkaloids by CANOPUS (p>0.5) in the different samples
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

@@ -1,6 +1,8 @@
-# Get molecules (IK) with an activity, reported as an IC50,
-# below 500 nM against L. donovani and, it it exists, the feature(s)
-# annoatated as the corresponding IK2D.
+#+ summary: Get molecules (IK) with an activity, reported as an IC50, below 500 nM against L. donovani and, it it exists, the feature(s) annoatated as the corresponding IK2D.
+#+ description: Get molecules (IK) with an activity, reported as an IC50, below 500 nM against L. donovani and, it it exists, the feature(s) annoatated as the corresponding IK2D.
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

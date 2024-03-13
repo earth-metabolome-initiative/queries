@@ -1,5 +1,9 @@
-# Count the number of IK with a WD ID that share
-# the same IK2D as annotations
+#+ summary: Count the number of IK with a WD ID that share the same IK2D as annotations
+#+ description: Count the number of IK with a WD ID that share the same IK2D as annotations
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

@@ -1,5 +1,8 @@
-# Count the occurence of NPC chemical classes annotations (by CANOPUS)
-# in a selection of samples and in the complete dataset
+#+ summary: Count the occurence of NPC chemical classes annotations (by CANOPUS) in a selection of samples and in the complete dataset
+#+ description: Count the occurence of NPC chemical classes annotations (by CANOPUS) in a selection of samples and in the complete dataset
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

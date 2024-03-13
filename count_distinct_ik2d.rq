@@ -1,7 +1,6 @@
 #+ summary: Distinct IK2D among structural annotations
 #+ description: Count the number of distinct IK2D among structural annotations
 #+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
-#+ endpoint_in_url: False
 #+ tags:
 #+   - ENPKG
 

@@ -4,10 +4,9 @@
 #+ tags:
 #+   - ENPKG
 #+   - Templated
+#+ defaults:
+#+   RTTolerance: 5
 #+ enumerate:
-#+   - RTTolerance:
-#+     - 5
-#+     - 10
 #+   - SampleCode:
 #+     - VGF156_A01
 #+     - VGF156_A02

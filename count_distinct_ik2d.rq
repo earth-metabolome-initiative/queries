@@ -1,10 +1,11 @@
 #+ summary: Distinct IK2D among structural annotations
 #+ description: Count the number of distinct IK2D among structural annotations
-#+ endpoint: https://enpkg.commons-lab.org/graphdb/sparql
-#+ pagination: 100
-#+ method: GET
+#+ endpoint: https://enpkg.commons-lab.org/repositories/ENPKG
+#+ endpoint_in_url: False
 #+ tags:
 #+   - ENPKG
+
+
 
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>

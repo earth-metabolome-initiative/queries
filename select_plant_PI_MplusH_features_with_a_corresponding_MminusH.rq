@@ -31,27 +31,28 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
 SELECT DISTINCT ?feature ?rt ?pm ?feature_opp ?rt_opp ?pm_opp
 WHERE
+{
     {
-    ?sample rdf:type enpkg:LabExtract
-    FILTER(regex(str(?sample), "VGF156_A06")) #Melochia umbellata
-    
-    ?sample enpkg:has_LCMS ?lcms .
-        ?lcms rdf:type enpkg:LCMSAnalysisPos .
-        ?lcms enpkg:has_lcms_feature_list ?feature_list .
-            ?feature_list enpkg:has_lcms_feature ?feature .
-                ?feature enpkg:has_parent_mass ?pm .
-                ?feature enpkg:has_retention_time ?rt .
-                ?feature enpkg:has_sirius_annotation ?sirius .
-                    ?sirius enpkg:has_sirius_adduct ?adduct .
-                    FILTER(regex(str(?adduct), "[M+H]+"))
+        ?sample rdf:type enpkg:LabExtract
+        FILTER(regex(str(?sample), "VGF156_A06")) #Melochia umbellata
         
-    ?sample enpkg:has_LCMS ?lcms_opp .
-    ?lcms_opp rdf:type enpkg:LCMSAnalysisNeg .
-    ?lcms_opp enpkg:has_lcms_feature_list ?feature_list_opp .
-        ?feature_list_opp enpkg:has_lcms_feature ?feature_opp .
-        ?feature_opp enpkg:has_parent_mass ?pm_opp .
-        ?feature_opp enpkg:has_retention_time ?rt_opp .
-    FILTER(((?rt - ?_rtTolerance_integer) < ?rt_opp) && ((?rt + ?_rtTolerance_integer) > ?rt_opp))
-    FILTER((?pm_opp > ((?pm - 2.014) - ((?_ppmTolerance_integer * 0.000001) * (?pm - 2.014)))) && (?pm_opp < ((?pm - 2.014) + ((?_ppmTolerance_integer * 0.000001) * (?pm - 2.014)))))
+        ?sample enpkg:has_LCMS ?lcms .
+            ?lcms rdf:type enpkg:LCMSAnalysisPos .
+            ?lcms enpkg:has_lcms_feature_list ?feature_list .
+                ?feature_list enpkg:has_lcms_feature ?feature .
+                    ?feature enpkg:has_parent_mass ?pm .
+                    ?feature enpkg:has_retention_time ?rt .
+                    ?feature enpkg:has_sirius_annotation ?sirius .
+                        ?sirius enpkg:has_sirius_adduct ?adduct .
+                        FILTER(regex(str(?adduct), "[M+H]+"))
+            
+        ?sample enpkg:has_LCMS ?lcms_opp .
+        ?lcms_opp rdf:type enpkg:LCMSAnalysisNeg .
+        ?lcms_opp enpkg:has_lcms_feature_list ?feature_list_opp .
+            ?feature_list_opp enpkg:has_lcms_feature ?feature_opp .
+            ?feature_opp enpkg:has_parent_mass ?pm_opp .
+            ?feature_opp enpkg:has_retention_time ?rt_opp .
+        FILTER(((?rt - ?_rtTolerance_integer) < ?rt_opp) && ((?rt + ?_rtTolerance_integer) > ?rt_opp))
+        FILTER((?pm_opp > ((?pm - 2.014) - ((?_ppmTolerance_integer * 0.000001) * (?pm - 2.014)))) && (?pm_opp < ((?pm - 2.014) + ((?_ppmTolerance_integer * 0.000001) * (?pm - 2.014)))))
     }
-
+}

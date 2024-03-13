@@ -1,0 +1,69 @@
+#+ summary: Spectral search peak-loss
+#+ description: Search, through counts of common peaks and loss, spectrally related features within or across datasets. Return their species and upper taxonomy through a federated Wikidata search
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/sparql
+#+ tags:
+#+   - ENPKG
+#+   - Natural products
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>        
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+SELECT ?family_name ?genus_name ?species_name ?wd_sp ?feature ?sub_rt ?sub_parent_mass ?count
+WHERE {
+    # Subquery to get the top N hits with their Wikidata IDs
+    {
+        SELECT ?wd_sp ?feature (SAMPLE(?rt) AS ?sub_rt) (SAMPLE(?parent_mass) AS ?sub_parent_mass) (COUNT(?peakloss) AS ?count)
+        WHERE {
+            ?material enpkg:has_lab_process ?extract .
+            ?material enpkg:has_wd_id ?wd_sp .
+            ?material enpkg:submitted_taxon ?taxon .
+            ?extract rdf:type enpkg:LabExtract .
+            ?extract enpkg:has_LCMS ?lcms .
+            ?lcms enpkg:has_massive_doi ?massive_doi .
+            FILTER(regex(str(?massive_doi), "MSV000093464")) # MassIVE id filter, MSV000087728 is pf1600, MSV000093464 is 337 Korean medicinal plants, if you want to query both you can pipe "MSV000087728|MSV000093464". You can apply or not these filters by ucommenting/commenting this line.
+            ?lcms rdf:type enpkg:LCMSAnalysisPos .
+            ?lcms enpkg:has_lcms_feature_list ?feature_list .
+            ?feature_list enpkg:has_lcms_feature ?feature .
+            ?feature rdf:type enpkg:LCMSFeature .
+            ?feature enpkg:has_spec2vec_doc ?doc .
+            ?feature enpkg:has_parent_mass ?parent_mass .
+            ?feature enpkg:has_retention_time ?rt .
+            ?doc enpkg:has_spec2vec_loss|enpkg:has_spec2vec_peak ?peakloss .
+            
+            {
+                SELECT ?peakloss WHERE {
+                    ?feature rdf:type enpkg:LCMSFeature
+                    FILTER(regex(str(?feature), "mzspec:MSV000087728:VGF151_E05_features_ms2_pos.mgf:scan:4$")) # USI of the feature of interest 
+                    ?feature enpkg:has_spec2vec_doc ?doc .
+                    ?doc enpkg:has_spec2vec_loss|enpkg:has_spec2vec_peak ?peakloss .
+                }
+            }
+        }
+        GROUP BY ?wd_sp ?feature
+        ORDER BY DESC(?count)
+        LIMIT 5
+    }
+
+    # Outer query to fetch species names from Wikidata
+    # Fetching taxonomic information from Wikidata
+    SERVICE <https://query.wikidata.org/sparql> {
+        ?wd_sp wdt:P225 ?species_name .
+        OPTIONAL {
+            ?family wdt:P31 wd:Q16521 ;
+                    wdt:P105 wd:Q35409 ;
+                    wdt:P225 ?family_name ;
+                    ^wdt:P171* ?wd_sp .
+        }
+        OPTIONAL {
+            ?genus wdt:P31 wd:Q16521 ;
+                    wdt:P105 wd:Q34740 ;
+                    wdt:P225 ?genus_name ;
+                    ^wdt:P171* ?wd_sp .
+        }
+    }
+}
+GROUP BY ?family_name ?genus_name ?species_name ?wd_sp ?feature ?sub_rt ?sub_parent_mass ?count
+ORDER BY DESC(?count)

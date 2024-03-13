@@ -1,0 +1,14 @@
+# Count the number of IK with a WD ID that share
+# the same IK2D as annotations
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT (COUNT(DISTINCT(?wd)) as ?count)
+WHERE
+    {   
+    ?annotation rdf:type enpkg:Annotation .
+        ?annotation enpkg:has_InChIkey2D ?ik2d .
+            ?ik2d enpkg:is_InChIkey2D_of ?ik .
+                ?ik enpkg:has_wd_id ?wd
+    }

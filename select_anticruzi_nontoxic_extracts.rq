@@ -1,0 +1,31 @@
+# Among extracts with an activity against T. cruzi, select the
+# ones that show > 80% of inhibition and a cytotoxicity < 50%.
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+SELECT ?active_extract ?material ?wd_id ?taxon ?organe
+WHERE
+    { 
+        service <https://query.wikidata.org/sparql> {
+                ?wd_id wdt:P225 ?taxon .
+            }
+        { SELECT ?active_extract ?material ?wd_id ?organe WHERE
+    { 
+        ?active_extract rdf:type enpkg:LabExtract .
+            ?active_extract enpkgmodule:has_bioassay_results ?biores .
+            ?active_extract enpkgmodule:has_bioassay_results ?toxres .
+                ?biores rdf:type enpkgmodule:Tcruzi10ugml .
+                ?toxres rdf:type enpkgmodule:L610ugml .
+                    ?biores enpkgmodule:inhibition_percentage ?tc_inhib .
+                    ?toxres enpkgmodule:inhibition_percentage ?l6_inhib .
+                    FILTER((?tc_inhib > 80) && (?l6_inhib < 50))
+        ?material enpkg:has_lab_process ?active_extract .
+        ?material enpkgmodule:has_organe ?organe .
+            ?material enpkg:has_wd_id ?wd_id .
+            }
+        }
+    }

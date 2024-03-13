@@ -1,0 +1,13 @@
+# Count the number of LCMS features in negative ionization mode
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT (COUNT(?feature) as ?count)
+WHERE
+    { 
+    ?feature rdf:type enpkg:LCMSFeature .
+        ?featurelist enpkg:has_lcms_feature ?feature .
+            ?lcms enpkg:has_lcms_feature_list ?featurelist .
+                ?lcms rdf:type enpkg:LCMSAnalysisNeg
+    }

@@ -1,0 +1,21 @@
+# Count the number of features with the same ISDB
+# and SIRIUS annotations
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT (COUNT(?feature) AS ?count) 
+WHERE
+    {
+        ?lcms enpkg:has_massive_doi ?massive_doi .
+        # FILTER(regex(str(?massive_doi), "MSV000087728")) # MassIVE id filter, MSV000087728 is pf1600, MSV000093464 is 337 Korean medicinal plants, if you want to query both you can pipe "MSV000087728|MSV000093464". You can apply or not these filters by ucommenting/commenting this line.
+        ?lcms enpkg:has_lcms_feature_list ?feature_list .
+        ?feature_list enpkg:has_lcms_feature ?feature .
+        ?feature enpkg:has_sirius_annotation ?sirius_annotation .
+            ?sirius_annotation rdf:type enpkg:SiriusStructureAnnotation .
+            ?sirius_annotation enpkg:has_InChIkey2D ?sirius_ik2d .
+        ?feature enpkg:has_isdb_annotation ?isdb_annotation .
+            ?isdb_annotation rdf:type enpkg:IsdbAnnotation .
+            ?isdb_annotation enpkg:has_InChIkey2D ?isdb_ik2d .
+    FILTER(?isdb_ik2d = ?sirius_ik2d) .
+    }

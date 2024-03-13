@@ -1,0 +1,41 @@
+# For structural annotations in Pristimera indica roots extracts,
+# get the Tanimoto similarity versus isoiguesterin
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX sachem: <http://bioinfo.uochb.cas.cz/rdf/v1.0/sachem#> # prefixes needed for structural similarity search
+PREFIX idsm: <https://idsm.elixir-czech.cz/sparql/endpoint/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?ik2d (SAMPLE(?smiles) AS ?smiles) (SAMPLE(?SCORE) AS ?SCORE) 
+WHERE
+    {   
+    ?sample rdf:type enpkg:LabExtract .
+    FILTER(regex(str(?sample), "VGF141_B11")) # Pristimera indica roots extract
+        ?sample enpkg:has_LCMS ?lcms .
+        ?lcms rdf:type enpkg:LCMSAnalysisPos ;
+             enpkg:has_lcms_feature_list ?feature_list .
+            ?feature_list enpkg:has_lcms_feature ?feature .
+            {?feature enpkg:has_sirius_annotation ?annotation .
+                ?annotation enpkg:has_InChIkey2D ?ik2d ;
+                	enpkg:has_cosmic_score ?cosmic ;
+                	enpkg:has_zodiac_score ?zodiac .
+                FILTER((?cosmic > 0.5) && (?zodiac > 0.8))}
+                UNION
+            {?feature enpkg:has_isdb_annotation ?annotation .
+                ?annotation enpkg:has_taxo_score ?taxo .
+                FILTER(?taxo >= 6)}
+                
+                ?annotation enpkg:has_InChIkey2D ?ik2d .
+                ?ik2d enpkg:has_smiles ?smiles ;
+                 enpkg:is_InChIkey2D_of ?ik .
+                    ?ik enpkg:has_wd_id ?wd_id .
+                    SERVICE idsm:wikidata 
+                    {
+                        [ sachem:compound ?wd_id;
+                            sachem:score ?SCORE ] sachem:similaritySearch [
+                                sachem:query "CC1=C(C(=O)C=C2C1=CC=C3C2(CCC4(C3(CCC5(C4CC(=C)CC5)C)C)C)C)O"; #isoiguesterin
+                                sachem:cutoff "0.01"^^xsd:double ].
+                    }                                  
+    } GROUP BY ?ik2d

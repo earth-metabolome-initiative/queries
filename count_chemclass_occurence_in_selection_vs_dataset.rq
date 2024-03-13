@@ -1,0 +1,47 @@
+# Count the occurence of NPC chemical classes annotations (by CANOPUS)
+# in a selection of samples and in the complete dataset
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT *
+    {
+        {
+        SELECT ?np_class (AVG(?count_sel) AS ?avg_sel)
+        WHERE
+            {   
+            SELECT ?np_class (COUNT(DISTINCT ?canopus) AS ?count_sel)
+            WHERE
+                {  
+            ?canopus rdf:type enpkg:SiriusCanopusAnnotation .
+                ?canopus enpkg:has_canopus_npc_class ?np_class .
+                ?canopus enpkg:has_canopus_npc_class_prob ?prob .
+            FILTER((?prob > 0.5))
+            ?feature enpkg:has_canopus_annotation ?canopus .
+                ?feature_list enpkg:has_lcms_feature ?feature .
+                ?lcms enpkg:has_lcms_feature_list ?feature_list .
+                    ?sample enpkg:has_LCMS ?lcms .
+                FILTER(regex(str(?sample), "VGF150_H08|VGF146_F09|VGF146_E08|VGF150_A09|VGF155_D05|VGF139_H07"))
+                } GROUP BY ?sample ?np_class
+            } GROUP BY ?np_class
+        }
+        {
+        SELECT ?np_class (AVG(?count_tot) AS ?avg_tot)
+        WHERE
+            {   
+            SELECT ?np_class (COUNT(DISTINCT ?canopus) AS ?count_tot)
+            WHERE
+                {   
+            ?canopus rdf:type enpkg:SiriusCanopusAnnotation .
+                ?canopus enpkg:has_canopus_npc_class ?np_class .
+                ?canopus enpkg:has_canopus_npc_class_prob ?prob .
+            FILTER((?prob > 0.5))
+            ?feature enpkg:has_canopus_annotation ?canopus .
+                ?feature_list enpkg:has_lcms_feature ?feature .
+                ?lcms enpkg:has_lcms_feature_list ?feature_list .
+                    ?sample enpkg:has_LCMS ?lcms .
+                } GROUP BY ?sample ?np_class
+            } GROUP BY ?np_class
+        }
+    }

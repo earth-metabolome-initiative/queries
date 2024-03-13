@@ -1,0 +1,38 @@
+# Get molecules (IK) with an activity, reported as an IC50,
+# below 500 nM against L. donovani and, it it exists, the feature(s)
+# annoatated as the corresponding IK2D.
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?ik (SAMPLE(?smiles) AS ?smiles) (SAMPLE(?activity) AS ?activity) (SAMPLE(?feature) AS ?feature)
+WHERE
+    {   
+    ?ik rdf:type enpkg:InChIkey .
+    ?ik enpkgmodule:has_chembl_id ?chembl_id .
+    ?ik enpkg:has_smiles ?smiles .
+    ?chembl_id enpkgmodule:has_chembl_activity ?chembl_activity .
+        ?chembl_activity enpkgmodule:target_id ?target .
+        ?chembl_activity enpkgmodule:activity_type ?act_type .
+        ?chembl_activity enpkgmodule:activity_value ?activity .
+    FILTER(regex(str(?target), "CHEMBL367")) #L. donovani
+    FILTER(regex(str(?act_type), "IC50"))
+    FILTER(?activity < 500)
+    OPTIONAL
+        {?ik2d enpkg:is_InChIkey2D_of ?ik .
+            ?siriusannotation enpkg:has_InChIkey2D ?ik2d .
+            ?isdbannotation enpkg:has_InChIkey2D ?ik2d . 
+                ?feature enpkg:has_sirius_annotation ?siriusannotation .
+                ?feature enpkg:has_isdb_annotation ?isdbannotation .
+                {?siriusannotation rdf:type enpkg:SiriusStructureAnnotation .
+                    ?siriusannotation enpkg:has_cosmic_score ?cosmic .
+                    ?siriusannotation enpkg:has_zodiac_score ?zodiac .
+                    FILTER((?cosmic > 0.5) && (?zodiac > 0.8))}
+                UNION
+                {?isdbannotation rdf:type enpkg:IsdbAnnotation .
+                    ?isdbannotation enpkg:has_isdb_taxo_score ?taxo_score .
+                    FILTER(?taxo_score >= 6)}
+        }
+    }
+    GROUP BY ?ik

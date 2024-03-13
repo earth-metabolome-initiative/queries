@@ -1,0 +1,11 @@
+# Count the number of distinct IK2D among structural annotations
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT (COUNT(DISTINCT(?ik2d)) as ?count)
+WHERE
+    {   
+    ?annotation rdf:type enpkg:Annotation .
+        ?annotation enpkg:has_InChIkey2D ?ik2d .
+    }

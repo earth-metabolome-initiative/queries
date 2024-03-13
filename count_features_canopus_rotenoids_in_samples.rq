@@ -1,0 +1,34 @@
+# Count the number of LCMS features annotated as rotenoids
+# in the different samples, and retrieve the activity of these
+# samples against T. cruzi.
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?sample ?tcact ?tox ?ccount
+WHERE
+    {
+    ?sample rdf:type enpkg:LabExtract .
+        ?sample enpkgmodule:has_bioassay_results ?tcres .
+        ?sample enpkgmodule:has_bioassay_results ?tcres2 .
+        ?tcres rdf:type enpkgmodule:Tcruzi10ugml .
+        ?tcres2 rdf:type enpkgmodule:L610ugml .
+            ?tcres enpkgmodule:inhibition_percentage ?tcact .
+            ?tcres2 enpkgmodule:inhibition_percentage ?tox .
+        {
+        SELECT ?sample (COUNT(DISTINCT ?canopus) AS ?ccount)
+        WHERE
+        {   
+        ?canopus rdf:type enpkg:SiriusCanopusAnnotation .
+            ?canopus enpkg:has_canopus_npc_class ?np_class .
+            ?canopus enpkg:has_canopus_npc_class_prob ?prob .
+        FILTER((regex(str(?np_class), "npc_Rotenoids")) && (?prob > 0.5))
+        ?feature enpkg:has_canopus_annotation ?canopus .
+            ?feature_list enpkg:has_lcms_feature ?feature .
+            ?lcms enpkg:has_lcms_feature_list ?feature_list .
+                ?sample enpkg:has_LCMS ?lcms .
+            }
+        GROUP BY ?sample ORDER BY DESC(?ccount)
+        }
+    }

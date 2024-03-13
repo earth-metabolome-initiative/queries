@@ -1,0 +1,38 @@
+# Get the PI mode LCMS features with SIRIUS annotation for which
+# a LCMS feature in NI mode of the same extract is annotated with
+# the same IK2D and has the same RT.
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+            
+SELECT DISTINCT ?feature ?feature_opp ?ik2d ?rt ?rt_opp
+WHERE
+    {
+    VALUES ?rt_tol {
+        "0.05"^^xsd:decimal # RT tolerance (minute)
+        }
+    ?sample rdf:type enpkg:LabExtract
+    FILTER(regex(str(?sample), "VGF156_A06"))
+
+    ?sample enpkg:has_LCMS ?lcms .
+        ?lcms rdf:type enpkg:LCMSAnalysisPos .
+        ?lcms enpkg:has_lcms_feature_list ?feature_list .
+            ?feature_list enpkg:has_lcms_feature ?feature .                    
+                ?feature enpkg:has_retention_time ?rt .
+                ?feature enpkg:has_sirius_annotation ?sirius .
+                    ?sirius enpkg:has_InChIkey2D ?ik2d .
+                    
+        
+    ?sample enpkg:has_LCMS ?lcms_opp .
+    ?lcms_opp rdf:type enpkg:LCMSAnalysisNeg .
+    ?lcms_opp enpkg:has_lcms_feature_list ?feature_list_opp .
+        ?feature_list_opp enpkg:has_lcms_feature ?feature_opp .
+            ?feature_opp enpkg:has_retention_time ?rt_opp .
+            ?feature_opp enpkg:has_sirius_annotation ?sirius_opp .
+                ?sirius_opp enpkg:has_InChIkey2D ?ik2d .
+
+    FILTER(((?rt - ?rt_tol) < ?rt_opp) && ((?rt + ?rt_tol) > ?rt_opp))
+    }
+

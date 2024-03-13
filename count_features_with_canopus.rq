@@ -1,0 +1,11 @@
+# Count the number of LCMS features annotated by CANOPUS
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT (COUNT(DISTINCT(?feature)) as ?count)
+WHERE
+        {   
+        ?feature rdf:type enpkg:LCMSFeature .
+                ?feature enpkg:has_canopus_annotation ?annotation .
+        }

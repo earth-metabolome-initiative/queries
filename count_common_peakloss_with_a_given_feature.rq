@@ -1,0 +1,31 @@
+# Count for a given LCMS feature of the dataset the number of peak/loss
+# in common with a given feature
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+            
+SELECT ?feature (SAMPLE(?rt) AS ?rt) (SAMPLE(?parent_mass) AS ?parent_mass) (COUNT(?peakloss) AS ?count)
+WHERE
+    { 
+        ?lcms enpkg:has_massive_doi ?massive_doi .
+        FILTER(regex(str(?massive_doi), "MSV000087728")) # MassIVE id filter
+        ?lcms rdf:type enpkg:LCMSAnalysisPos .
+        ?lcms enpkg:has_lcms_feature_list ?feature_list .
+        ?feature_list enpkg:has_lcms_feature ?feature .
+        ?feature rdf:type enpkg:LCMSFeature .
+        ?feature enpkg:has_spec2vec_doc ?doc .
+        ?feature enpkg:has_parent_mass ?parent_mass .
+        ?feature enpkg:has_retention_time ?rt .
+            ?doc enpkg:has_spec2vec_loss|enpkg:has_spec2vec_peak ?peakloss .
+
+        {SELECT ?peakloss WHERE {
+            ?feature rdf:type enpkg:LCMSFeature
+            FILTER(regex(str(?feature), "SC_AP_Wi_DCM_features_ms2_pos.mgf:scan:1$")) # [M+H]+ of waltherione G
+            ?feature enpkg:has_spec2vec_doc ?doc .
+                ?doc enpkg:has_spec2vec_loss|enpkg:has_spec2vec_peak ?peakloss .
+            }
+        }
+    }
+    GROUP BY ?feature ORDER BY DESC(?count)

@@ -22,7 +22,7 @@ WHERE
 {
     {
         ?source_sample rdf:type enpkg:RawMaterial ;
-                    enpkg:submitted_taxon ?_TaxonName_string ;
+                    enpkg:submitted_taxon ?_TaxonName ;
                     enpkg:has_lab_process ?sample.
         
         ?sample rdf:type enpkg:LabExtract.

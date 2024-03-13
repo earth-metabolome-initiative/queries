@@ -26,8 +26,7 @@ WHERE
                 	enpkg:has_cosmic_score ?cosmic ;
                 	enpkg:has_zodiac_score ?zodiac .
                 FILTER((?cosmic > 0.5) && (?zodiac > 0.8))}
-                UNION
-            {?feature enpkg:has_isdb_annotation ?annotation .
+                UNION {?feature enpkg:has_isdb_annotation ?annotation .
                 ?annotation enpkg:has_taxo_score ?taxo .
                 FILTER(?taxo >= 6)}
                 

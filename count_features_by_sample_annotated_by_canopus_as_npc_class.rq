@@ -7,6 +7,7 @@
 #+ enumerate:
 #+   - NPCClass:
 #+     - Aspidosperma_type
+#+     - "Aspidosperma_type"
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

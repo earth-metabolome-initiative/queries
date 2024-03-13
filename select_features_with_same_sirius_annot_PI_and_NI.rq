@@ -5,7 +5,7 @@
 #+   - ENPKG
 #+   - Templated
 #+ enumerate:
-#+   - ppm:
+#+   - RTTolerance:
 #+     - 5
 #+     - 10
 #+   - SampleCode:
@@ -113,11 +113,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
             
 SELECT DISTINCT ?feature ?feature_opp ?ik2d ?rt ?rt_opp
 WHERE
-{    
     {
-    VALUES ?rt_tol {
-        ?_ppm # RT tolerance (minute)
-        }
     ?sample rdf:type enpkg:LabExtract
     FILTER(regex(str(?sample), ?_SampleCode))
 
@@ -138,6 +134,6 @@ WHERE
             ?feature_opp enpkg:has_sirius_annotation ?sirius_opp .
                 ?sirius_opp enpkg:has_InChIkey2D ?ik2d .
 
-    FILTER(((?rt - ?rt_tol) < ?rt_opp) && ((?rt + ?rt_tol) > ?rt_opp))
+    FILTER(((?rt - ?RTTolerance_integer) < ?rt_opp) && ((?rt + ?RTTolerance_integer) > ?rt_opp))
     }
-}
+

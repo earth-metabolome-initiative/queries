@@ -46,7 +46,7 @@ WHERE
                                 ?feature enpkg:has_canopus_annotation ?canopus .
                                     ?canopus enpkg:has_canopus_npc_class ?np_class .
                                     ?canopus enpkg:has_canopus_npc_class_prob ?class_prob .
-                                    FILTER(regex(str(?np_class), "?_NPCClass_iri")) .
+                                    FILTER(regex(str(?np_class), ?_NPCClass_iri)) .
                                     FILTER((?class_prob > 0.5)) .
             } GROUP BY ?extract ORDER BY DESC(?count_of_selected_class)
         }

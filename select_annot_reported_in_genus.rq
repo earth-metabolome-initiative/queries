@@ -1,5 +1,9 @@
-# Select, among SIRIUS anotations of Tabernaemontana coffeoides seeds extract,
-# the ones that are reported in the Tabernaemontana genus.
+#+ summary: Select, among SIRIUS anotations of Tabernaemontana coffeoides seeds extract, the ones that are reported in the Tabernaemontana genus.
+#+ description: Select, among SIRIUS anotations of Tabernaemontana coffeoides seeds extract, the ones that are reported in the Tabernaemontana genus.
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

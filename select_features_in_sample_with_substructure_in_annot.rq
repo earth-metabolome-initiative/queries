@@ -1,5 +1,9 @@
-# Among the structural annotations in Tabernaemontana coffeoides seeds extract,
-# get the ones that contain an Aspidospermidine scaffold scaffold.
+#+ summary: Among the structural annotations in Tabernaemontana coffeoides seeds extract, get the ones that contain an Aspidospermidine scaffold scaffold.
+#+ description: Among the structural annotations in Tabernaemontana coffeoides seeds extract, get the ones that contain an Aspidospermidine scaffold scaffold.
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

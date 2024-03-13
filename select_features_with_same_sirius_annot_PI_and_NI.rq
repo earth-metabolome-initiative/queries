@@ -1,6 +1,9 @@
-# Get the PI mode LCMS features with SIRIUS annotation for which
-# a LCMS feature in NI mode of the same extract is annotated with
-# the same IK2D and has the same RT.
+#+ summary: Get the PI mode LCMS features with SIRIUS annotation for which a LCMS feature in NI mode of the same extract is annotated with the same IK2D and has the same RT.
+#+ description: Get the PI mode LCMS features with SIRIUS annotation for which a LCMS feature in NI mode of the same extract is annotated with the same IK2D and has the same RT.
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

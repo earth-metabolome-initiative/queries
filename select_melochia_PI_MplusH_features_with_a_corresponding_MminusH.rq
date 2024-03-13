@@ -1,6 +1,9 @@
-# Among Melochia umbellata LCMS features in PI mode,
-# get the ones that are annoatted as [M+H]+ by SIRIUS and for which
-# a LCMS feature in NI mode with the corresponding [M-H]- m/z is found.
+#+ summary: Among Melochia umbellata LCMS features in PI mode, get the ones that are annoatted as [M+H]+ by SIRIUS and for which a LCMS feature in NI mode with the corresponding [M-H]- m/z is found.
+#+ description: Among Melochia umbellata LCMS features in PI mode, get the ones that are annoatted as [M+H]+ by SIRIUS and for which a LCMS feature in NI mode with the corresponding [M-H]- m/z is found.
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

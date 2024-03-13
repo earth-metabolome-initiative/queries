@@ -1,6 +1,9 @@
-# Among structural annotations in Melochia umbellata extract,
-# select the ones that have an activity reported against T. cruzi (ChEMBL)
-# with the taxon they are already reported in (Wikidata).
+#+ summary: Among structural annotations in Melochia umbellata extract, select the ones that have an activity reported against T. cruzi (ChEMBL) with the taxon they are already reported in (Wikidata).
+#+ description: Among structural annotations in Melochia umbellata extract, select the ones that have an activity reported against T. cruzi (ChEMBL) with the taxon they are already reported in (Wikidata).
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

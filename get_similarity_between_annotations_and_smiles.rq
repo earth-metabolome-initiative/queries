@@ -1,5 +1,9 @@
-# For structural annotations in Pristimera indica roots extracts,
-# get the Tanimoto similarity versus isoiguesterin
+#+ summary: For structural annotations in Pristimera indica roots extracts, get the Tanimoto similarity versus isoiguesterin
+#+ description: For structural annotations in Pristimera indica roots extracts, get the Tanimoto similarity versus isoiguesterin
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

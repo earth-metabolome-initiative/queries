@@ -1,4 +1,8 @@
-
+#+ summary: This query retrieves the top 7 most similar documents to a target compound spectra, based on the Jaccard similarity of the set of features (losses and peaks) between the target compound and the other compounds in the dataset. The query also retrieves the taxonomic information of the species associated with the compounds.
+#+ description: This query retrieves the top 7 most similar documents to a target compound spectra, based on the Jaccard similarity of the set of features (losses and peaks) between the target compound and the other compounds in the dataset. The query also retrieves the taxonomic information of the species associated with the compounds.
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

@@ -1,6 +1,8 @@
-# Returns spectral features organized by decreasing Jaccard similarity 
-# on a list of selected features sharing common peaks and losses.
-# Adapt input spectra and top N
+#+ summary: Returns spectral features organized by decreasing Jaccard similarity on a list of selected features sharing common peaks and losses. Adapt input spectra and top N
+#+ description: Returns spectral features organized by decreasing Jaccard similarity on a list of selected features sharing common peaks and losses. Adapt input spectra and top N
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

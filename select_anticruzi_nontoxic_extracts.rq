@@ -1,5 +1,10 @@
-# Among extracts with an activity against T. cruzi, select the
-# ones that show > 80% of inhibition and a cytotoxicity < 50%.
+#+ summary: Among extracts with an activity against T. cruzi, select the ones that show > 80% of inhibition and a cytotoxicity < 50%.
+#+ description: Among extracts with an activity against T. cruzi, select the ones that show > 80% of inhibition and a cytotoxicity < 50%.
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

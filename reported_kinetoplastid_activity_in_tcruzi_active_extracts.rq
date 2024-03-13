@@ -1,5 +1,8 @@
-# Among structural annotations (PI mode) in T. cruzi clustered active extracts,
-# get annotations with reported activity againt T. cruzi, T. brucei or L.donovani
+#+ summary: Among structural annotations (PI mode) in T. cruzi clustered active extracts, get annotations with reported activity againt T. cruzi, T. brucei or L.donovani
+#+ description: Among structural annotations (PI mode) in T. cruzi clustered active extracts, get annotations with reported activity againt T. cruzi, T. brucei or L.donovani
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>

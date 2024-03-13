@@ -3,13 +3,7 @@
 #+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
 #+ tags:
 #+   - ENPKG
-#+   - Templated
-#+ enumerate:
-#+   - ppm:
-#+     - 5
-#+     - 10
-#+   - SampleCode:
-#+     - VGF156_A06
+
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
 PREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>
@@ -23,7 +17,7 @@ WHERE
         "0.05"^^xsd:decimal # RT tolerance (minute)
         }
     ?sample rdf:type enpkg:LabExtract
-    FILTER(regex(str(?sample), ?_SampleCode))
+    FILTER(regex(str(?sample), "VGF156_A06"))
 
     ?sample enpkg:has_LCMS ?lcms .
         ?lcms rdf:type enpkg:LCMSAnalysisPos .

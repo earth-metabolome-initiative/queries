@@ -20,7 +20,7 @@ SELECT DISTINCT ?feature ?rt ?pm ?feature_opp ?rt_opp ?pm_opp
 WHERE
     { 
     VALUES ?ppm {
-        ?_ppm_decimal
+        "5"^^xsd:decimal # m/z tolerance
         }
     VALUES ?rt_tol {
         "0.05"^^xsd:decimal # RT tolerance (minute)

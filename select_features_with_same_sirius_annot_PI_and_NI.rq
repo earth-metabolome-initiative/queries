@@ -134,6 +134,6 @@ WHERE
             ?feature_opp enpkg:has_sirius_annotation ?sirius_opp .
                 ?sirius_opp enpkg:has_InChIkey2D ?ik2d .
 
-    FILTER(((?rt - ?RTTolerance_integer) < ?rt_opp) && ((?rt + ?RTTolerance_integer) > ?rt_opp))
+    FILTER(((?rt - ?_RTTolerance_integer) < ?rt_opp) && ((?rt + ?_RTTolerance_integer) > ?rt_opp))
     }
 }

@@ -1,5 +1,5 @@
-#+ summary: For structural annotations in Pristimera indica roots extracts, get the Tanimoto similarity versus isoiguesterin
-#+ description: For structural annotations in Pristimera indica roots extracts, get the Tanimoto similarity versus isoiguesterin
+#+ summary: For structural annotations in Pristimera indica roots extracts, get the Tanimoto similarity versus isoiguesterin.
+#+ description: For structural annotations in Pristimera indica roots extracts, get the Tanimoto similarity versus isoiguesterin.
 #+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
 #+ tags:
 #+   - ENPKG
@@ -16,7 +16,7 @@ SELECT ?ik2d (SAMPLE(?smiles) AS ?smiles) (SAMPLE(?SCORE) AS ?SCORE)
 WHERE
     {   
     ?sample rdf:type enpkg:LabExtract .
-    FILTER(regex(str(?sample), "VGF141_B11")) # Pristimera indica roots extract
+    FILTER(regex(str(?sample), "VGF141_B11")) # Pristimera indica roots extract.
         ?sample enpkg:has_LCMS ?lcms .
         ?lcms rdf:type enpkg:LCMSAnalysisPos ;
              enpkg:has_lcms_feature_list ?feature_list .
@@ -38,7 +38,7 @@ WHERE
                     {
                         [ sachem:compound ?wd_id;
                             sachem:score ?SCORE ] sachem:similaritySearch [
-                                sachem:query "CC1=C(C(=O)C=C2C1=CC=C3C2(CCC4(C3(CCC5(C4CC(=C)CC5)C)C)C)C)O"; #isoiguesterin
+                                sachem:query "CC1=C(C(=O)C=C2C1=CC=C3C2(CCC4(C3(CCC5(C4CC(=C)CC5)C)C)C)C)O"; #isoiguesterin.
                                 sachem:cutoff "0.01"^^xsd:double ].
                     }                                  
     } GROUP BY ?ik2d

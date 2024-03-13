@@ -5,7 +5,7 @@
 #+   - ENPKG
 #+   - Templated
 #+ defaults:
-#+   RTTolerance: 5
+#+   - RTTolerance: 5
 #+ enumerate:
 #+   - SampleCode:
 #+     - VGF156_A01

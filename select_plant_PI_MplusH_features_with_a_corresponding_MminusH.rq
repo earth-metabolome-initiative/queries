@@ -7,20 +7,8 @@
 #+ defaults:
 #+   - ppmTolerance: 5
 #+   - rtTolerance: 0.05
-#+ enumerate:
-#+   - SampleCode:
-#+     - VGF156_A01
-#+     - VGF156_A02
-#+     - VGF156_A03
-#+     - VGF156_A04
-#+     - VGF156_A05
-#+     - VGF156_A06
-#+     - VGF156_A07
-#+     - VGF156_A08
-#+     - VGF156_A09
-#+     - VGF156_A10
-#+     - VGF156_A11
-#+     - VGF156_A12
+#+   - TaxonName: Melochia umbellata
+
 
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
@@ -33,8 +21,11 @@ SELECT DISTINCT ?feature ?rt ?pm ?feature_opp ?rt_opp ?pm_opp
 WHERE
 {
     {
-        ?sample rdf:type enpkg:LabExtract
-        FILTER(regex(str(?sample), "VGF156_A06")) #Melochia umbellata
+        ?source_sample rdf:type enpkg:RawMaterial ;
+                    enpkg:submitted_taxon ?_TaxonName_string ;
+                    enpkg:has_lab_process ?sample.
+        
+        ?sample rdf:type enpkg:LabExtract.
         
         ?sample enpkg:has_LCMS ?lcms .
             ?lcms rdf:type enpkg:LCMSAnalysisPos .
@@ -56,3 +47,5 @@ WHERE
         FILTER((?pm_opp > ((?pm - 2.014) - ((?_ppmTolerance_integer * 0.000001) * (?pm - 2.014)))) && (?pm_opp < ((?pm - 2.014) + ((?_ppmTolerance_integer * 0.000001) * (?pm - 2.014)))))
     }
 }
+
+

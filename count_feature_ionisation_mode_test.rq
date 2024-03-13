@@ -1,0 +1,24 @@
+#+ summary: Count the number of LCMS features in poistive ionization mode
+#+ description: Count the number of LCMS features in positive ionization mode
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+#+   - Templated
+#+ enumerate:
+#+   - type:
+#+     - https://enpkg.commons-lab.org/kg/LCMSAnalysisPos
+#+     - https://enpkg.commons-lab.org/kg/LCMSAnalysisNeg
+#+   - test:
+#+     - https://enpkg.commons-lab.org/kg/LCMSFeature
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT (COUNT(?feature) as ?count)
+WHERE
+    { 
+    ?feature rdf:type ?_test_iri .
+        ?featurelist enpkg:has_lcms_feature ?feature .
+            ?lcms enpkg:has_lcms_feature_list ?featurelist .
+                ?lcms rdf:type ?_type_iri .
+    }

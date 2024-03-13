@@ -1,0 +1,21 @@
+#+ summary: Count the number of LCMS features annotated by ISDB
+#+ description: Count the number of LCMS features annotated by ISDB
+#+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
+#+ tags:
+#+   - ENPKG
+#+ enumerate:
+#+   - type:
+#+     - https://enpkg.commons-lab.org/kg/LCMSAnalysisPos
+#+     - https://enpkg.commons-lab.org/kg/LCMSAnalysisNeg
+
+
+PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT (COUNT(DISTINCT(?feature)) as ?count)
+WHERE
+    {   
+    ?feature rdf:type enpkg:LCMSFeature .
+            ?feature rdftype enpkg:has_isdb_annotation
+            ?feature enpkg:has_isdb_annotation ?annotation .
+    }

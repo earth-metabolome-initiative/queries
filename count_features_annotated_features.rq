@@ -4,9 +4,10 @@
 #+ tags:
 #+   - ENPKG
 #+ enumerate:
-#+   - type:
-#+     - https://enpkg.commons-lab.org/kg/LCMSAnalysisPos
-#+     - https://enpkg.commons-lab.org/kg/LCMSAnalysisNeg
+#+   - annotation_tool:
+#+     - https://enpkg.commons-lab.org/kg/has_isdb_annotation
+#+     - https://enpkg.commons-lab.org/kg/has_sirius_annotation
+#+     - https://enpkg.commons-lab.org/kg/has_canopus_annotation
 
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
@@ -16,6 +17,5 @@ SELECT (COUNT(DISTINCT(?feature)) as ?count)
 WHERE
     {   
     ?feature rdf:type enpkg:LCMSFeature .
-            ?feature rdftype enpkg:has_isdb_annotation
-            ?feature enpkg:has_isdb_annotation ?annotation .
+            ?feature ?_annotation_tool_iri ?annotation .
     }

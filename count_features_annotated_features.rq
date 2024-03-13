@@ -3,11 +3,11 @@
 #+ endpoint: https://enpkg.commons-lab.org/graphdb/repositories/ENPKG
 #+ tags:
 #+   - ENPKG
+#+   - Templated
 #+ enumerate:
-#+   - annotation_tool:
+#+   - annotationtool:
 #+     - https://enpkg.commons-lab.org/kg/has_isdb_annotation
 #+     - https://enpkg.commons-lab.org/kg/has_sirius_annotation
-#+     - https://enpkg.commons-lab.org/kg/has_canopus_annotation
 
 
 PREFIX enpkg: <https://enpkg.commons-lab.org/kg/>
@@ -17,5 +17,5 @@ SELECT (COUNT(DISTINCT(?feature)) as ?count)
 WHERE
     {   
     ?feature rdf:type enpkg:LCMSFeature .
-            ?feature ?_annotation_tool_iri ?annotation .
+            ?feature ?_annotationtool_iri ?annotation .
     }

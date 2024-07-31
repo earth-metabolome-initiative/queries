@@ -1,4 +1,4 @@
-#Digital Botanical Garden Initiative queries based on the EMI ontology
+# Digital Botanical Garden Initiative queries based on the EMI ontology
 
 All .rq files were automatically generated with the [generate-rq-files](generate-rq-files) bash script. To do so, this script retrieves the queries stored in the RDF graph `<https://sib-swiss.github.io/sparql-examples/examples/dbgi/>` in emi-dbgi repostitory 
 accessible via the SPARQL endpoint: https://biosoda.unil.ch/graphdb/repositories/emi-dbgi or with GraphDB workbench at https://biosoda.unil.ch/graphdb/sparql.

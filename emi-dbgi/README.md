@@ -14,7 +14,7 @@ Install jq, a json command line tool: https://jqlang.github.io/jq/
 - MacOs with brew
 `brew install jq`
 
-- Run the script
+Run the script
 `./generate-rq-files`
 
 The files will be saved in the current directory where the script was executed. If you want to change the output directory edit the variable in script file:

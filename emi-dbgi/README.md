@@ -6,3 +6,16 @@ accessible via the SPARQL endpoint: https://biosoda.unil.ch/graphdb/repositories
 The queries in the RDF graph `<https://sib-swiss.github.io/sparql-examples/examples/dbgi/>` were loaded from the Turtle files available at https://github.com/sib-swiss/sparql-examples/tree/master/examples/dbgi
 
 For further information about the EMI ontology, see [here](https://github.com/digital-botanical-gardens-initiative/earth_metabolome_ontology/tree/main)
+
+# Running the rq file generator
+Install jq, a json command line tool: https://jqlang.github.io/jq/
+- Ubuntu
+`sudo apt-get install jq`
+- MacOs with brew
+`brew install jq`
+
+- Run the script
+`./generate-rq-files`
+
+The files will be saved in the current directory where the script was executed. If you want to change the output directory edit the variable in script file:
+`output_directory=./`

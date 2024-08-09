@@ -15,7 +15,10 @@ Install jq, a json command line tool: https://jqlang.github.io/jq/
 `brew install jq`
 
 Run the script
-`./generate-rq-files`
+```bash 
+./generate-rq-files -o ./ -t "#+\t- DBGI\n" -p "emi-dbgi" -e "https://biosoda.unil.ch/graphdb/repositories/emi-dbgi"
+```
 
-The files will be saved in the current directory where the script was executed. If you want to change the output directory edit the variable in the script file:
-`output_directory=./`
+The files will be saved in the current directory where the script was executed as defined with option `-o`. For more information about options, run 
+
+`./generate-rq-files -h` 

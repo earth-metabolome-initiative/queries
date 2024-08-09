@@ -1,12 +1,49 @@
 #!/bin/bash
 
-output_directory=./
-tags="\t- DBGI"
-endpoint_query_examples="https://biosoda.unil.ch/graphdb/repositories/emi-dbgi"
-#Get question-query pairs
-curl -L -H "Accept: application/sparql-results+json" "$endpoint_query_examples?query=PREFIX%20ex%3A%20%3Chttps%3A%2F%2Fsib-swiss.github.io%2Fsparql-examples%2Fexamples%2Fdbgi%2F%3E%0APREFIX%20sh%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2Fns%2Fshacl%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20schema%3A%20%3Chttps%3A%2F%2Fschema.org%2F%3E%0A%0Aselect%20*%20from%20%3Chttps%3A%2F%2Fsib-swiss.github.io%2Fsparql-examples%2Fexamples%2Fdbgi%2F%3E%20where%20%7B%20%0A%09%3Fa%20sh%3Aselect%20%3Fquery_sparql%3B%0A%20%20%20%20rdfs%3Acomment%20%3Fquestion%3B%0A%20%20%20%20schema%3Atarget%20%3Fendpoint%20.%0A%09%7Bselect%20(count(%3Fquery)%20as%20%3Fpairs_count)%7B%0A%09%3Fquery%20a%20sh%3ASPARQLExecutable%0A%20%20%20%20%20%20%20%20%7D%7D%0A%7D%20%0A" > $output_directory/emi-dbgi-queries.json
 
-json_file=$output_directory/emi-dbgi-queries.json
+while getopts ":o:p:e:t:h" option; do
+   case "$option" in        
+      t) # tag
+         tags=$OPTARG      
+          ;;
+      p) # file prefix
+         database_name=$OPTARG
+          ;;
+      o) # output directory
+         output_directory=$OPTARG
+          ;;
+      e) # target endpoint
+         endpoint_query_examples=$OPTARG
+          ;;
+      h) # target endpoint
+         # Display Help
+   echo "Convert Question-Query pairs in SHACL to grlc .rq syntax."
+   echo
+   echo "Syntax: generate-rq-files [-o|h|e|p|t]"
+   echo "options:"
+   echo "o     Output directory."
+   echo "h     Print this Help."
+   echo "e     Target endpoint to retrieve the question-query pairs."
+   echo "p     Prefix name to be used in generated files."
+   echo "t     Hard-coded tags to appear in rq files for question-query examples. E.g., -t '#+\t- DBGI\n#+\t- EMI'"
+   echo "Example: ./generate-rq-files -o ./ -t '#+\t- DBGI\n' -p emi-dbgi -e 'https://biosoda.unil.ch/graphdb/repositories/emi-dbgi'"
+   echo 
+         exit ;;
+     *) # Invalid option
+          echo "Invalid option"
+         exit ;;
+   esac
+done
+
+if [ -z "$tags" ]; then  tags="" ; fi
+if [ -z "$database_name" ]; then  database_name=emi-dbgi ; fi
+if [ -z "$output_directory" ]; then  output_directory=./ ; fi
+if [ -z "$endpoint_query_examples" ]; then  endpoint_query_examples="https://biosoda.unil.ch/graphdb/repositories/emi-dbgi" ; fi
+
+#Get question-query pairs
+curl -L -H "Accept: application/sparql-results+json" "$endpoint_query_examples?query=PREFIX%20sh%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2Fns%2Fshacl%23%3E%0APREFIX%20rdfs%3A%20%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0APREFIX%20schema%3A%20%3Chttps%3A%2F%2Fschema.org%2F%3E%0A%0Aselect%20*%20%20where%20%7B%20%0A%20%20%20%20VALUES%20%3Fquery_type%20%7Bsh%3Aselect%20sh%3Aask%20sh%3Aconstruct%20sh%3Aupdate%7D%0A%20%20%20%20%3Fquery_id%20a%20sh%3ASPARQLExecutable%20%3B%0A%20%20%20%20%20%20%20%20%3Fquery_type%20%3Fquery_sparql%3B%0A%20%20%20%20%09rdfs%3Acomment%20%3Fquestion%3B%0A%20%20%20%20%09schema%3Atarget%20%3Fendpoint%20.%20%20%20%20%20%20%20%20%20%20%20%0A%09%7Bselect%20(count(%3Fquery)%20as%20%3Fpairs_count)%7B%0A%09%09%09%3Fquery%20a%20sh%3ASPARQLExecutable%20%7D%7D%0A%7D%20" > $output_directory/$database_name-queries.json
+
+json_file=$output_directory/$database_name-queries.json
 query_count=$(jq -r '.results.bindings.[1].pairs_count.value' $json_file)
 i=0
 while [ $i -lt $query_count ]
@@ -18,6 +55,6 @@ do
 	query_sparql_text="$(eval $query_sparql)"
 	endpoint_text="$(eval $endpoint)"
 	i=$(($i+1))
-	printf -v rq_file "#+ summary: $question_text\n#+ description: $question_text\n#+ endpoint: $endpoint_text\n#+ tags:\n#+$tags\n\n$query_sparql_text"
-	echo "$rq_file" > emi-dbgi-$i.rq 
+	printf -v rq_file "#+ summary: $question_text\n#+ description: $question_text\n#+ endpoint: $endpoint_text\n#+ tags:\n$tags\n$query_sparql_text"
+	echo "$rq_file" > $database_name-$i.rq 
 done

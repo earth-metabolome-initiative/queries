@@ -15,19 +15,18 @@ while getopts ":o:p:e:t:h" option; do
       e) # target endpoint
          endpoint_query_examples=$OPTARG
           ;;
-      h) # target endpoint
-         # Display Help
-   echo "Convert Question-Query pairs in SHACL to grlc .rq syntax."
-   echo
-   echo "Syntax: generate-rq-files [-o|h|e|p|t]"
-   echo "options:"
-   echo "o     Output directory."
-   echo "h     Print this Help."
-   echo "e     Target endpoint to retrieve the question-query pairs."
-   echo "p     Prefix name to be used in generated files."
-   echo "t     Hard-coded tags to appear in rq files for question-query examples. E.g., -t '#+\t- DBGI\n#+\t- EMI'"
-   echo "Example: ./generate-rq-files -o ./ -t '#+\t- DBGI\n' -p emi-dbgi -e 'https://biosoda.unil.ch/graphdb/repositories/emi-dbgi'"
-   echo 
+      h) 
+   	echo "Convert Question-Query pairs in SHACL to grlc .rq syntax."
+   	echo
+   	echo "Syntax: generate-rq-files [-o|h|e|p|t]"
+   	echo "options:"
+   	echo "o     Output directory."
+   	echo "h     Print this Help."
+   	echo "e     Target endpoint to retrieve the question-query pairs."
+   	echo "p     Prefix name to be used in generated files."
+   	echo "t     Hard-coded tags to appear in rq files for question-query examples. E.g., -t '#+\t- DBGI\n#+\t- EMI'"
+   	echo "Example: ./generate-rq-files -o ./ -t '#+\t- DBGI\n' -p emi-dbgi -e 'https://biosoda.unil.ch/graphdb/repositories/emi-dbgi'"
+   	echo 
          exit ;;
      *) # Invalid option
           echo "Invalid option"
